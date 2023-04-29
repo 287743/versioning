@@ -26,3 +26,21 @@ resource "aws_subnet" "main" {
     Name = "Main"
   }
 }
+
+resource "aws_s3_bucket" "terraform_state_bucket" {
+ bucket = "yogesh"
+ acl    = "private"
+ versioning {
+   enabled = true
+ }
+}
+
+resource "aws_dynamodb_table" "terraform_state_lock" {
+ name           = "raju"
+ billing_mode   = "PAY_PER_REQUEST"
+ hash_key       = "LockID"
+ attribute {
+   name = "LockID"
+   type = "S"
+ }
+}
